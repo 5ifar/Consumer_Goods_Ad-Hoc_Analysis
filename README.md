@@ -23,3 +23,21 @@ The project raw data files have not been uploaded to this repository in complian
   2. E-commerce Customer: Online websites E.g. Amazon, Flipkart
 - AtliQ Hardwares also has a minor B2C business model wherein they own stores: AtliQ E-store and AtliQ Exclusive. These are called Direct channels.
 - They also have Distributors in some countries with restricted trade. E.g. Neptune
+
+## Table of Contents:
+Please find the resource links for the project below:
+- to be added
+
+## Tools used:
+1. MySQL - for Data Cleaning, Data Manipulation, Normalization and Analysis process
+2. Datawrapper - to create data visualizations
+3. Power BI - to create dashboard
+4. GitHub - for documentation
+
+## Methodologies used:
+1. Data Cleaning
+2. Data Manipulation - Functions, Views, Stored Procedures, Triggers, Temporary Tables, Helper Tables
+3. Database Modelling and Normalization - ERD
+4. Exploratory Data Analysis
+5. Data Visualization
+6. Documentation
