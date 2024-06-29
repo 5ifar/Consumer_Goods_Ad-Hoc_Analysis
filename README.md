@@ -41,3 +41,19 @@ Please find the resource links for the project below:
 4. Exploratory Data Analysis
 5. Data Visualization
 6. Documentation
+
+## About the Dataset:
+### Data Sources: Finance & Supply Chain
+The dataset contains 9 tables in total, namely -
+- dim_customer: 209 records | 7 columns
+- dim_product: 397 records | 6 columns
+- fact_forecast_monthly: 1,880,064 records | 5 columns
+- fact_freight_cost: 135 records | 4 columns
+- fact_gross_price: 1,182 records | 3 columns
+- fact_manufacturing_cost: 1,182 records | 3 columns
+- fact_post_invoice_deductions: 2,057,704 records | 5 columns
+- fact_pre_invoice_deductions: 1,045 records | 3 columns
+- fact_sales_monthly: 1,436,905 records | 5 columns
+
+### Data Dictionary:
+-to be added-
