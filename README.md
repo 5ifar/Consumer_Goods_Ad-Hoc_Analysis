@@ -26,7 +26,17 @@ The project raw data files have not been uploaded to this repository in complian
 
 ## Table of Contents:
 Please find the resource links for the project below:
-- to be added
+- [Introduction](#introduction)
+  - [...Objective to be added...]()
+- [...Code Files + Dashboards + Data Model to be added...]
+- [Tools used & Methodologies implemented](#tools-used)
+- [About the Dataset](#about-the-dataset)
+  - [...Data Dictionary to be added...]()
+  - [...Data Integrity to be added...]()
+- [...Data Cleaning to be added...]()
+- [...Data Model - ERD to be added...]()
+- [...Implementation to be added...]()
+- [...Analysis Insights to be added...]()
 
 ## Tools used:
 1. MySQL - for Data Cleaning, Data Manipulation, Normalization and Analysis process
@@ -34,7 +44,7 @@ Please find the resource links for the project below:
 3. Power BI - to create dashboard
 4. GitHub - for documentation
 
-## Methodologies used:
+## Skills & Methodologies implemented:
 1. Data Cleaning
 2. Data Manipulation - Functions, Views, Stored Procedures, Triggers, Temporary Tables, Helper Tables
 3. Database Modelling and Normalization - ERD
