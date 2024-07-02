@@ -67,3 +67,11 @@ The dataset contains 9 tables in total, namely -
 
 ### Data Dictionary:
 -to be added-
+
+## Data Integrity:
+ROCCC Evaluation:
+- Reliability: MED - The raw dataset is created and updated by Codebasics. It has total 9 files. All of them were utilized in the analysis.
+- Originality: HIGH - First party provider (Codebasics)
+- Comprehensiveness: HIGH - Total 9 Files with a total of around 5.3 Million records were provided. Dataset contains multiple dimension parameters for Customers & Products as well as comprehensive Finance & Supply Chain transaction data.
+- Current: LOW - Dataset was updated upto FY 2022 i.e almost 2 years old. So its not very relevant. Any trends observed and insights gained need to be comprehended as a general (not FY-specific) trend.
+- Citation: LOW - No official citation/reference available.
