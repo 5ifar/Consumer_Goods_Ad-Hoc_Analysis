@@ -60,3 +60,32 @@
 |cost_year|year|Primary Key|
 |manufacturing_cost|decimal(15,4)|Non-Nullable|
 
+### 7. fact_post_invoice_deductions: 2,057,704 records | 5 columns
+
+|Column name|Data type|Constraint|
+|-|-|-|
+|customer_code|int|Primary Key|
+|product_code|varchar(45)|Primary Key|
+|date|date|Primary Key|
+|discounts_pct|decimal(5,4)|Non-Nullable|
+|other_deductions_pct|decimal(5,4)|Non-Nullable|
+
+### 8. fact_pre_invoice_deductions: 1,045 records | 3 columns
+
+|Column name|Data type|Constraint|
+|-|-|-|
+|customer_code|int|Primary Key|
+|fiscal_year|year|Primary Key|
+|pre_invoice_discount_pct|decimal(5,4)|Non-Nullable|
+
+### 9. fact_sales_monthly: 1,436,905 records | 5 columns
+
+|Column name|Data type|Constraint|
+|-|-|-|
+|date|date|Primary Key|
+|fiscal_year|year|Nullable|
+|customer_code|int|Primary Key|
+|product_code|varchar(45)|Primary Key|
+|sold_quantity|int|Non-Nullable|
+
+---
