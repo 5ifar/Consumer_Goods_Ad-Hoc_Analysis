@@ -44,5 +44,19 @@
 |freight_pct|decimal(5,4)|Non-Nullable|
 |other_cost_pct|decimal(5,4)|Non-Nullable|
 
+### 5. fact_gross_price: 1,182 records | 3 columns
 
+|Column name|Data type|Constraint|
+|-|-|-|
+|product_code|varchar(45)|Primary Key|
+|fiscal_year|year|Primary Key|
+|gross_price|decimal(15,4)|Non-Nullable|
+
+### 6. fact_manufacturing_cost: 1,182 records | 3 columns
+
+|Column name|Data type|Constraint|
+|-|-|-|
+|product_code|varchar(45)|Primary Key|
+|cost_year|year|Primary Key|
+|manufacturing_cost|decimal(15,4)|Non-Nullable|
 
