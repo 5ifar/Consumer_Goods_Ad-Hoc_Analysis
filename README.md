@@ -69,7 +69,7 @@ The dataset contains 9 tables in total, namely -
 - fact_sales_monthly: 1,436,905 records | 5 columns
 
 ### Data Dictionary:
-...link to be added...
+[Link to the Data Dictionary Documentation](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Data%20Model/Data%20Dictionary.md)
 
 ## Data Integrity:
 ROCCC Evaluation:
