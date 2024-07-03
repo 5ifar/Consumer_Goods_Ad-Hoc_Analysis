@@ -4,35 +4,45 @@
 
 ### 1. dim_customer: 209 records | 7 columns
 
-|Column name|Data type|Constraint|Description|
-|-|-|-|-|
-|customer_code|int|Primary Key|The Unique Customer Code|
-|customer|varchar(150)|Non-Nullable|The Name of Customer|
-|platform|varchar(45)|Non-Nullable|The Platform type of Customer|
-|channel|varchar(45)|Non-Nullable|The Channel type of Customer|
-|market|varchar(45)|Nullable|The Market of Operation|
-|sub_zone|varchar(45)|Nullable|The Sub Zone for the Market|
-|region|varchar(45)|Nullable|The Region for the Sub Zone|
+|Column name|Data type|Constraint|
+|-|-|-|
+|customer_code|int|Primary Key|
+|customer|varchar(150)|Non-Nullable|
+|platform|varchar(45)|Non-Nullable|
+|channel|varchar(45)|Non-Nullable|
+|market|varchar(45)|Nullable|
+|sub_zone|varchar(45)|Nullable|
+|region|varchar(45)|Nullable|
 
 ### 2. dim_product: 397 records | 6 columns
 
-|Column name|Data type|Constraint|Description|
-|-|-|-|-|
-|product_code|varchar(45)|Primary Key|The Unique Product Code|
-|product|varchar(200)|Non-Nullable|The Name of Product|
-|variant|varchar(45)|Nullable|The Variant of Product|
-|category|varchar(45)|Non-Nullable|The Category of Product|
-|segment|varchar(45)|Non-Nullable|The Segment for the Category|
-|division|varchar(45)|Non-Nullable|The Division type of the Segment|
+|Column name|Data type|Constraint|
+|-|-|-|
+|product_code|varchar(45)|Primary Key|
+|product|varchar(200)|Non-Nullable|
+|variant|varchar(45)|Nullable|
+|category|varchar(45)|Non-Nullable|
+|segment|varchar(45)|Non-Nullable|
+|division|varchar(45)|Non-Nullable|
+
+### 3. fact_forecast_monthly: 1,880,064 records | 5 columns
+
+|Column name|Data type|Constraint|
+|-|-|-|
+|date|date|Non-Nullable|
+|fiscal_year|year|Nullable|
+|product_code|varchar(45)|Non-Nullable|
+|customer_code|int|Non-Nullable|
+|forecast_quantity|int|Non-Nullable|
+
+### 4. fact_freight_cost: 135 records | 4 columns
+
+|Column name|Data type|Constraint|
+|-|-|-|
+|market|varchar(45)|Primary Key|
+|fiscal_year|year|Primary Key|
+|freight_pct|decimal(5,4)|Non-Nullable|
+|other_cost_pct|decimal(5,4)|Non-Nullable|
 
 
 
-
-
-|||||
-|||||
-|||||
-|||||
-|||||
-|||||
-|||||
