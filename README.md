@@ -24,6 +24,9 @@ The project raw data files have not been uploaded to this repository in complian
 - AtliQ Hardwares also has a minor B2C business model wherein they own stores: AtliQ E-store and AtliQ Exclusive. These are called Direct channels.
 - They also have Distributors in some countries with restricted trade. E.g. Neptune
 
+## Introduction:
+...to be added...
+
 ## Table of Contents:
 Please find the resource links for the project below:
 - [Introduction](#introduction)
@@ -66,7 +69,7 @@ The dataset contains 9 tables in total, namely -
 - fact_sales_monthly: 1,436,905 records | 5 columns
 
 ### Data Dictionary:
--to be added-
+...link to be added...
 
 ## Data Integrity:
 ROCCC Evaluation:
