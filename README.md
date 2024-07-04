@@ -27,7 +27,7 @@ The project raw data files have not been uploaded to this repository in complian
 ## Project Objective:
 ...to be added...
 
-## Table of Contents:
+## Contents:
 Please find the resource links for the project below:
 - [Introduction to AtliQ Hardware](#introduction-to-atliq-hardware)
   - [...Project Objective to be added...]()
