@@ -34,8 +34,8 @@ Please find the resource links for the project below:
 - [...Code Files + Dashboards + Data Model to be added...]
 - [Tools used & Methodologies implemented](#tools-used)
 - [About the Dataset](#about-the-dataset)
-  - [...Data Dictionary to be added...]()
-  - [...Data Integrity to be added...]()
+  - [Data Dictionary](#data-dictionary)
+  - [Data Integrity](#data-integrity)
 - [...Data Model - ERD to be added...]()
 - [...Project Implementation to be added...]()
 - [...Analysis Insights to be added...]()
