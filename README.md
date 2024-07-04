@@ -12,7 +12,7 @@ The project raw data files have not been uploaded to this repository in complian
 
 ---
 
-## Introduction:
+## Introduction to AtliQ Hardware:
 **Domain:** Consumer Goods | **Functions:** Finance & Supply Chain
 
 - AtliQ Hardwares is company that sells computer hardware and peripherals like PC, mouse, printer etc. to clients across the world.
@@ -24,13 +24,13 @@ The project raw data files have not been uploaded to this repository in complian
 - AtliQ Hardwares also has a minor B2C business model wherein they own stores: AtliQ E-store and AtliQ Exclusive. These are called Direct channels.
 - They also have Distributors in some countries with restricted trade. E.g. Neptune
 
-## Introduction:
+## Project Objective:
 ...to be added...
 
 ## Table of Contents:
 Please find the resource links for the project below:
-- [Introduction](#introduction)
-  - [...Objective to be added...]()
+- [Introduction to AtliQ Hardware](#introduction-to-atliq-hardware)
+  - [...Project Objective to be added...]()
 - [...Code Files + Dashboards + Data Model to be added...]
 - [Tools used & Methodologies implemented](#tools-used)
 - [About the Dataset](#about-the-dataset)
