@@ -36,9 +36,8 @@ Please find the resource links for the project below:
 - [About the Dataset](#about-the-dataset)
   - [...Data Dictionary to be added...]()
   - [...Data Integrity to be added...]()
-- [...Data Cleaning to be added...]()
 - [...Data Model - ERD to be added...]()
-- [...Implementation to be added...]()
+- [...Project Implementation to be added...]()
 - [...Analysis Insights to be added...]()
 
 ## Tools used:
@@ -78,3 +77,7 @@ ROCCC Evaluation:
 - Comprehensiveness: HIGH - Total 9 Files with a total of around 5.3 Million records were provided. Dataset contains multiple dimension parameters for Customers & Products as well as comprehensive Finance & Supply Chain transaction data.
 - Current: LOW - Dataset was updated upto FY 2022 i.e almost 2 years old. So its not very relevant. Any trends observed and insights gained need to be comprehended as a general (not FY-specific) trend.
 - Citation: LOW - No official citation/reference available.
+
+## Project Implementation:
+Please find the documentation links for the project phase-wise implementation below:
+- [...Data Cleaning to be added...]()
