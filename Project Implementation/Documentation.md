@@ -3,11 +3,22 @@
 ---
 
 ## Phases of Implementation
-- [Data Cleaning](#data-cleaning)
+- [1. Data Import](#1-data-import)
+- [2. Data Cleaning](#2-data-cleaning)
 
 ---
 
-## Data Cleaning
+## 1. Data Import
+Importing Data from Database:
+
+- AtliQ Hardware Database: atliq-db.sql
+- Server Tab → Data Import → Import from Self-contained File → Select Database file from directory → Import Progress Tab → Start Import → Once complete, Refresh Schema List
+- Database Schema Name: gdb0041     |     Total Data: Around 2,000,000 records
+- Set the gdb0041 as the default database schema for all queries by double clicking or right click & set default schema
+
+---
+
+## 2. Data Cleaning
 The following steps were taken to clean the data:
 
 - **Step 1:** Imported DB and loaded the data for 9 tables: dim_customer, dim_product, fact_forecast_monthly, fact_freight_cost, fact_gross_price, fact_manufacturing_cost, fact_post_invoice_deductions, fact_pre_invoice_deductions & fact_sales_monthly.
@@ -77,6 +88,9 @@ UPDATE dim_product SET segment = TRIM(segment);
 UPDATE dim_product SET category = TRIM(category);
 UPDATE dim_product SET variant = TRIM(variant);
 ```
+
+---
+
 
 
 
