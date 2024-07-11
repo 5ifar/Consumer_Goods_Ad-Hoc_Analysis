@@ -5,6 +5,8 @@
 ## Phases of Implementation
 - [1. Data Import](#1-data-import)
 - [2. Data Cleaning](#2-data-cleaning)
+- [3. Database Design](#3-database-design)
+- [4. Calculate Fiscal Year & Fiscal Quarter using Functions](#4-calculate-fiscal-year--fiscal-quarter-using-functions)
 
 ---
 
@@ -91,7 +93,60 @@ UPDATE dim_product SET variant = TRIM(variant);
 
 ---
 
+## 3. Database Design
+...To be added...
 
+---
 
+## 4. Calculate Fiscal Year & Fiscal Quarter using Functions
+### Fiscal Year:
+
+The Fiscal Year cycle for AtliQ Hardware spans from September through August. I only have calendar date data in all of my columns, so I’ll need to calculate the FY. In this case I’ll have to add 4 months to the Calendar Date and the Year part of the new date will tell me the Fiscal year. E.g. Sep 2021 + 4 months = Jan 2022 → FY 22. I’ll use the DATE_ADD function for this use case.
+
+Logic: Add 4 Months and extract Year component → SQL Code: FY = YEAR(DATE_ADD(date, INTERVAL 4 MONTH))
+
+Now instead of repeating this code everywhere and making my queries unnecessarily longer, I can setup a custom User-defined SQL function to automate this calculation.
+
+DB gdb0041 → Functions → Create Function:
+
+```sql
+CREATE FUNCTION `get_fiscal_year` (
+	calendar_date DATE
+)
+RETURNS INTEGER
+DETERMINISTIC
+BEGIN
+	DECLARE fiscal_year INT;
+	SET fiscal_year = YEAR(DATE_ADD(calendar_date, INTERVAL 4 MONTH));
+RETURN fiscal_year;
+END
+```
+
+### Fiscal Quarter:
+
+The Fiscal Quarter depends on the months. For AtliQ Fiscal Year spans from September through August, Quarter 1 will be September, October & November. Quarter 2 will be December, January & February. Quarter 3 will be March, April & May. Quarter 4 will be June, July & August.
+
+Logic: If Month number: 9, 10 , 11 then Q1; 12, 1, 2 then Q2; 3, 4, 5 then Q3; 6, 7, 8 then Q4. → SQL Function used: MONTH(date)
+
+DB gdb0041 → Functions → Create Function:
+
+```sql
+CREATE FUNCTION `get_fiscal_quarter`(
+	calendar_date DATE
+) RETURNS char(2) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+	DECLARE m TINYINT;
+    DECLARE fiscal_quarter CHAR(2);
+    SET m = MONTH(calendar_date);
+    CASE
+		WHEN m IN (9, 10, 11) THEN SET fiscal_quarter = "Q1";
+        WHEN m IN (12, 1, 2) THEN SET fiscal_quarter = "Q2";
+        WHEN m IN (3, 4, 5) THEN SET fiscal_quarter = "Q3";
+        ELSE SET fiscal_quarter = "Q4"; -- WHEN m IN (6, 7, 8)
+    END CASE;
+RETURN fiscal_quarter;
+END
+```
 
 
