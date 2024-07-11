@@ -156,7 +156,7 @@ END
 ---
 
 ## 5. Finance Analytics
-Finance Analytics involves generating reports that provide key Sales & Finance data for specific use cases.
+Finance Analytics involves generating reports that provide key Sales & Finance data for specific use cases usually automated through Stored Procedures.
 
 ### 5.1 Gross Sales Report: Croma FY 2021 Monthly Product Transactions
 Task: Generate report of individual Product Sales (aggregated on a monthly basis at product code level) for Croma in India FY 2021.
@@ -190,8 +190,39 @@ GROUP BY month
 ORDER BY month ASC;
 ```
 
+### 5.3 Gross Sales Report: Croma Yearly Gross Sales
+Task: Generate report of Yearly total Gross Sales amount for Croma India customer.
 
+```sql
+-- Gross Sales Report: Croma Yearly Gross Sales
+-- Generate report of yearly total gross sales amount for Croma India customer.
+-- Display Fields: Fiscal Year, Total Gross Sales for Croma India
 
+SELECT get_fiscal_year(fsm.date) as fiscal_year, ROUND(SUM(fsm.sold_quantity * fgp.gross_price), 2) AS yearly_gross_sales
+FROM fact_sales_monthly AS fsm
+JOIN fact_gross_price AS fgp ON fsm.product_code = fgp.product_code AND get_fiscal_year(fsm.date) = fgp.fiscal_year
+WHERE customer_code = 90002002 -- customer = Croma
+GROUP BY get_fiscal_year(fsm.date)
+ORDER BY fiscal_year ASC;
+```
+
+### 5.4 Stored Procedure: Monthly Gross Sales Report
+Task: Generate Monthly Gross Sales Report for any Customer using Stored Procedure.
+
+```sql
+-- in_customer_codes is the comma separated input for which the Monthly Gross Sales Report will be generated.
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_monthly_gross_sales_for_customer`(
+	in_customer_codes TEXT
+)
+BEGIN
+	SELECT fsm.date AS month, ROUND(SUM(fsm.sold_quantity * fgp.gross_price), 2) AS monthly_gross_sales
+	FROM fact_sales_monthly AS fsm
+	JOIN fact_gross_price AS fgp ON fsm.product_code = fgp.product_code AND get_fiscal_year(fsm.date) = fgp.fiscal_year
+	WHERE FIND_IN_SET(fsm.customer_code, in_customer_codes) > 0
+	GROUP BY month;
+END
+```
 
 
 
