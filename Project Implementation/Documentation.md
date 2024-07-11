@@ -9,8 +9,12 @@
 - [4. Calculate Fiscal Year & Fiscal Quarter using Functions](#4-calculate-fiscal-year--fiscal-quarter-using-functions)
   - [Fiscal Year](#fiscal-year)
   - [Fiscal Quarter](#fiscal-quarter)
-- 
-  
+- [5. Finance Analytics](#5-finance-analytics)
+  - [5.1 Gross Sales Report: Croma FY 2021 Monthly Product Transactions](#51-gross-sales-report-croma-fy-2021-monthly-product-transactions)
+  - [5.2 Gross Sales Report: Croma Monthly Gross Sales](#52-gross-sales-report-croma-monthly-gross-sales)
+  - [5.3 Gross Sales Report: Croma Yearly Gross Sales](#53-gross-sales-report-croma-yearly-gross-sales)
+  - [5.4 Stored Procedure: Monthly Gross Sales Report](#54-stored-procedure-monthly-gross-sales-report)
+  - [5.5 Stored Procedure: Market Badge](#55-stored-procedure-market-badge)
 
 ---
 
