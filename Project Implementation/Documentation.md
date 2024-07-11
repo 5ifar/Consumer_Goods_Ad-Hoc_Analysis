@@ -7,6 +7,10 @@
 - [2. Data Cleaning](#2-data-cleaning)
 - [3. Database Design](#3-database-design)
 - [4. Calculate Fiscal Year & Fiscal Quarter using Functions](#4-calculate-fiscal-year--fiscal-quarter-using-functions)
+  - [Fiscal Year](#fiscal-year)
+  - [Fiscal Quarter](#fiscal-quarter)
+- 
+  
 
 ---
 
@@ -148,5 +152,54 @@ BEGIN
 RETURN fiscal_quarter;
 END
 ```
+
+---
+
+## 5. Finance Analytics
+Finance Analytics involves generating reports that provide key Sales & Finance data for specific use cases.
+
+### 5.1 Gross Sales Report: Croma FY 2021 Monthly Product Transactions
+Task: Generate report of individual Product Sales (aggregated on a monthly basis at product code level) for Croma in India FY 2021.
+
+```sql
+-- Gross Sales Report: Croma FY 2021 Monthly Product Transactions
+-- Generate report of individual product sales (aggregated on a monthly basis at product code level) for Croma in India FY 2021.
+-- Display Fields: Month, Product Name, Variant, Sold Quantity, Gross Price per Item, Gross Price Total
+
+SELECT fsm.date AS month, fsm.product_code, dp.product, dp.variant, fsm.sold_quantity, ROUND(fgp.gross_price, 2) AS gross_price, ROUND((fsm.sold_quantity * fgp.gross_price), 2) AS gross_sales
+FROM fact_sales_monthly AS fsm
+JOIN dim_product AS dp ON fsm.product_code = dp.product_code
+JOIN fact_gross_price AS fgp ON fsm.product_code = fgp.product_code AND get_fiscal_year(fsm.date) = fgp.fiscal_year
+WHERE customer_code = 90002002 AND get_fiscal_year(date) = 2021 -- Customer = Croma, FY =2021
+ORDER BY month ASC;
+```
+
+### 5.2 Gross Sales Report: Croma Monthly Gross Sales
+Task: Generate report of Monthly total Gross Sales amount for Croma India customer.
+
+```sql
+-- Gross Sales Report: Croma Monthly Gross Sales
+-- Generate report of monthly total gross sales amount for Croma India customer.
+-- Display Fields: Month, Total Gross Sales for Croma India
+
+SELECT fsm.date AS month, ROUND(SUM(fsm.sold_quantity * fgp.gross_price), 2) AS monthly_gross_sales
+FROM fact_sales_monthly AS fsm
+JOIN fact_gross_price AS fgp ON fsm.product_code = fgp.product_code AND get_fiscal_year(fsm.date) = fgp.fiscal_year
+WHERE customer_code = 90002002 -- customer = Croma
+GROUP BY month
+ORDER BY month ASC;
+```
+
+
+
+
+
+
+
+
+---
+
+
+
 
 
