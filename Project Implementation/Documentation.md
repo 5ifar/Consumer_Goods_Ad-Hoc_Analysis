@@ -15,6 +15,9 @@
   - [5.3 Gross Sales Report: Croma Yearly Gross Sales](#53-gross-sales-report-croma-yearly-gross-sales)
   - [5.4 Stored Procedure: Monthly Gross Sales Report](#54-stored-procedure-monthly-gross-sales-report)
   - [5.5 Stored Procedure: Market Badge](#55-stored-procedure-market-badge)
+- [6. Query Optimization](#6-query-optimization)
+  - [6.1 Creating dim_date table](#61-creating-dim_date-table)
+  - [6.2 Modifying fact_sales_monthly table to include fiscal_year](#62-modifying-fact_sales_monthly-table-to-include-fiscal_year)
 
 ---
 
@@ -111,7 +114,7 @@ UPDATE dim_product SET variant = TRIM(variant);
 
 The Fiscal Year cycle for AtliQ Hardware spans from September through August. I only have calendar date data in all of my columns, so I’ll need to calculate the FY. In this case I’ll have to add 4 months to the Calendar Date and the Year part of the new date will tell me the Fiscal year. E.g. Sep 2021 + 4 months = Jan 2022 → FY 22. I’ll use the DATE_ADD function for this use case.
 
-Logic: Add 4 Months and extract Year component → SQL Code: FY = YEAR(DATE_ADD(date, INTERVAL 4 MONTH))
+Logic: Add 4 Months and extract Year component → SQL Code: `FY = YEAR(DATE_ADD(date, INTERVAL 4 MONTH))`
 
 Now instead of repeating this code everywhere and making my queries unnecessarily longer, I can setup a custom User-defined SQL function to automate this calculation.
 
@@ -134,7 +137,7 @@ END
 
 The Fiscal Quarter depends on the months. For AtliQ Fiscal Year spans from September through August, Quarter 1 will be September, October & November. Quarter 2 will be December, January & February. Quarter 3 will be March, April & May. Quarter 4 will be June, July & August.
 
-Logic: If Month number: 9, 10 , 11 then Q1; 12, 1, 2 then Q2; 3, 4, 5 then Q3; 6, 7, 8 then Q4. → SQL Function used: MONTH(date)
+Logic: If Month number: 9, 10 , 11 then Q1; 12, 1, 2 then Q2; 3, 4, 5 then Q3; 6, 7, 8 then Q4. → SQL Function used: `MONTH(date)`
 
 DB gdb0041 → Functions → Create Function:
 
@@ -283,7 +286,19 @@ END
 
 ---
 
+## 6. Query Optimization
 
+### 6.1 Creating dim_date table:
 
+- Implementing the Fiscal Year Function in queries is slowing down the query execution time since the function is repeatedly called for all date values. An optimized better way would be to just create a dim_date table with fiscal_year field as a generated column using the same logic used in the get_fiscal_year function code.
+- Process: gdb0041 → Right click Tables → Create table → Name: dim_date → Add columns: 1. calendar_date (DATE) - Primary Key & Not Null Constraint, 2. fiscal_year (YEAR) - Generative Constraint with Expression: `YEAR(DATE_ADD(calendar_date, INTERVAL 4 MONTH))`
+- To enter data in the date table I checked the fact_sales_monthly table for the first and last date to get a range of date data. First date - 2017-09-01 , Last date - 2021-12-01, 76 Dates. Create an Excel file with 2 columns - date and fiscal_year and insert the date range values in the date column using auto-generation, leave fiscal_year column blank as it’ll be auto-filled when I import the data to out dim_date table through the generative column expression. Save as a CSV seed file: [date-seed.csv](https://prod-files-secure.s3.us-west-2.amazonaws.com/f170f411-4e97-4d88-bdda-1bda2f733ead/287bdf7b-753d-4462-842f-245faec4508a/date-seed.csv)
+- Import data to dim_date table (except fiscal_year column) using the Import records from an external file option in the result grid section by specifying the file directory. 76 records will be imported and fiscal_year column will be calculated.
+- The main advantage this provides is that now instead of using the get_fiscal_year function with date each time I want to join the fact_sales_monthly table with any other tables with fiscal_year column, I can first join it with dim_date table using the date field and then I can use the fiscal_year from the dim_date column instead of the function for joins and other use cases.
 
+### 6.2 Modifying fact_sales_monthly table to include fiscal_year:
 
+- Usually medium and large scale companies have paid storage solutions that can easily handle larger file sizes and are hence more inclined towards faster performance than low file size. So for such use case it would be a better alternative to add the fiscal_year column in the fact_sales_monthly table itself which would improve query performance at the cost of file size.
+- I’ll just add the same fiscal_year (YEAR) column with Generative Constraint with Expression: `YEAR(DATE_ADD(calendar_date, INTERVAL 4 MONTH))` to the fact_sales_monthly table after the date column.
+
+---
