@@ -309,8 +309,9 @@ END
 ---
 
 ## 7. Configuring Database Views
-- I’ll always need the fact_sales_monthly table for calculating pre & post invoice deduction columns since we have their values in percentage. To calculate the actual values I need to perform calculations on the gross_sales column. However each such subsequent calculation by nature would required stacking either multiple CTEs or Subqueries since joining the fact_sales_monthly table with other table and then calculating the value for the deduction percentage cannot be done in the same query since there will be derived calculated columns.
-- For such use case, the most optimum way would be to create specific use case Database views that have the ability to provide virtual tables for deduction calculations to be performed on.
+I’ll always need the fact_sales_monthly table for calculating pre & post invoice deduction columns since we have their values in percentage. To calculate the actual values I need to perform calculations on the gross_sales column. However each such subsequent calculation by nature would required stacking either multiple CTEs or Subqueries since joining the fact_sales_monthly table with other table and then calculating the value for the deduction percentage cannot be done in the same query since there will be derived calculated columns.
+
+For such use case, the most optimum way would be to create specific use case Database views that have the ability to provide virtual tables for deduction calculations to be performed on.
 
 ### 7.1 View: Gross Sales
 
@@ -383,3 +384,33 @@ CREATE VIEW `net_sales` AS
 ```
 
 ---
+
+## 8. Top Customers, Products & Markets Reports
+As a Product Owner, I want a report for Top Markets, Products & Customers by Net Sales (in millions) for a given financial year so that I can have a holistic view of our financial performance and can take appropriate actions to address any potential issues. Also created stored procedures so they can be rerun as required.
+
+All of the below reports can be generated for the Bottom parameters by reversing the Order By field direction to Descending.
+
+### 8.1 Top Markets report for a given FY by Net Sales (in millions):
+
+```sql
+CREATE PROCEDURE `get_top_n_markets_by_net_sales` (
+	in_fiscal_year INT,
+	in_top_n INT
+)
+BEGIN
+	SELECT 
+		market, 
+		ROUND(SUM(net_sales)/1000000, 2) AS net_sales_mil
+	FROM net_sales
+	WHERE fiscal_year = in_fiscal_year
+	GROUP BY market
+	ORDER BY net_sales_mil DESC
+	LIMIT in_top_n;
+END
+```
+
+
+
+
+
+
