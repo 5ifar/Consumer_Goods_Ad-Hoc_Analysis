@@ -117,11 +117,11 @@ UPDATE dim_product SET variant = TRIM(variant);
 ## 4. Calculate Fiscal Year & Fiscal Quarter using Functions
 ### Fiscal Year:
 
-The Fiscal Year cycle for AtliQ Hardware spans from September through August. I only have calendar date data in all of my columns, so I’ll need to calculate the FY. In this case I’ll have to add 4 months to the Calendar Date and the Year part of the new date will tell me the Fiscal year. E.g. Sep 2021 + 4 months = Jan 2022 → FY 22. I’ll use the DATE_ADD function for this use case.
+- The Fiscal Year cycle for AtliQ Hardware spans from September through August. I only have calendar date data in all of my columns, so I’ll need to calculate the FY. In this case I’ll have to add 4 months to the Calendar Date and the Year part of the new date will tell me the Fiscal year. E.g. Sep 2021 + 4 months = Jan 2022 → FY 22. I’ll use the DATE_ADD function for this use case.
 
-Logic: Add 4 Months and extract Year component → SQL Code: `FY = YEAR(DATE_ADD(date, INTERVAL 4 MONTH))`
+- Logic: Add 4 Months and extract Year component → SQL Code: `FY = YEAR(DATE_ADD(date, INTERVAL 4 MONTH))`
 
-Now instead of repeating this code everywhere and making my queries unnecessarily longer, I can setup a custom User-defined SQL function to automate this calculation.
+- Now instead of repeating this code everywhere and making my queries unnecessarily longer, I can setup a custom User-defined SQL function to automate this calculation.
 
 DB gdb0041 → Functions → Create Function:
 
@@ -140,9 +140,9 @@ END
 
 ### Fiscal Quarter:
 
-The Fiscal Quarter depends on the months. For AtliQ Fiscal Year spans from September through August, Quarter 1 will be September, October & November. Quarter 2 will be December, January & February. Quarter 3 will be March, April & May. Quarter 4 will be June, July & August.
+- The Fiscal Quarter depends on the months. For AtliQ Fiscal Year spans from September through August, Quarter 1 will be September, October & November. Quarter 2 will be December, January & February. Quarter 3 will be March, April & May. Quarter 4 will be June, July & August.
 
-Logic: If Month number: 9, 10 , 11 then Q1; 12, 1, 2 then Q2; 3, 4, 5 then Q3; 6, 7, 8 then Q4. → SQL Function used: `MONTH(date)`
+- Logic: If Month number: 9, 10 , 11 then Q1; 12, 1, 2 then Q2; 3, 4, 5 then Q3; 6, 7, 8 then Q4. → SQL Function used: `MONTH(date)`
 
 DB gdb0041 → Functions → Create Function:
 
@@ -168,10 +168,10 @@ END
 ---
 
 ## 5. Finance Analytics
-Finance Analytics involves generating reports that provide key Sales & Finance data for specific use cases usually automated through Stored Procedures.
+- Finance Analytics involves generating reports that provide key Sales & Finance data for specific use cases usually automated through Stored Procedures.
 
 ### 5.1 Gross Sales Report: Croma FY 2021 Monthly Product Transactions
-Task: Generate report of individual Product Sales (aggregated on a monthly basis at product code level) for Croma in India FY 2021.
+- Task: Generate report of individual Product Sales (aggregated on a monthly basis at product code level) for Croma in India FY 2021.
 
 ```sql
 -- Gross Sales Report: Croma FY 2021 Monthly Product Transactions
@@ -187,7 +187,7 @@ ORDER BY month ASC;
 ```
 
 ### 5.2 Gross Sales Report: Croma Monthly Gross Sales
-Task: Generate report of Monthly total Gross Sales amount for Croma India customer.
+- Task: Generate report of Monthly total Gross Sales amount for Croma India customer.
 
 ```sql
 -- Gross Sales Report: Croma Monthly Gross Sales
@@ -203,7 +203,7 @@ ORDER BY month ASC;
 ```
 
 ### 5.3 Gross Sales Report: Croma Yearly Gross Sales
-Task: Generate report of Yearly total Gross Sales amount for Croma India customer.
+- Task: Generate report of Yearly total Gross Sales amount for Croma India customer.
 
 ```sql
 -- Gross Sales Report: Croma Yearly Gross Sales
@@ -219,7 +219,7 @@ ORDER BY fiscal_year ASC;
 ```
 
 ### 5.4 Stored Procedure: Monthly Gross Sales Report
-Task: Generate Monthly Gross Sales Report for any Customer using Stored Procedure.
+- Task: Generate Monthly Gross Sales Report for any Customer using Stored Procedure.
 
 ```sql
 -- in_customer_codes is the comma separated input for which the Monthly Gross Sales Report will be generated.
@@ -237,9 +237,9 @@ END
 ```
 
 ### 5.5 Stored Procedure: Market Badge
-Not all markets are equally valuable to AliQ. The significance of a market for AtliQ depends on the quantity sold. Identify the high significance markets by assigning a status parameter.
+- Not all markets are equally valuable to AliQ. The significance of a market for AtliQ depends on the quantity sold. Identify the high significance markets by assigning a status parameter.
 
-Task: Write a Stored Procedure that can retrieve Market Badge. If total sold quantity > 5 million that market is considered "Gold" else "Silver”.
+- Task: Write a Stored Procedure that can retrieve Market Badge. If total sold quantity > 5 million that market is considered "Gold" else "Silver”.
 
 ```sql
 -- My Simpler & Less Optimized Code:
@@ -309,9 +309,9 @@ END
 ---
 
 ## 7. Configuring Database Views
-I’ll always need the fact_sales_monthly table for calculating pre & post invoice deduction columns since we have their values in percentage. To calculate the actual values I need to perform calculations on the gross_sales column. However each such subsequent calculation by nature would required stacking either multiple CTEs or Subqueries since joining the fact_sales_monthly table with other table and then calculating the value for the deduction percentage cannot be done in the same query since there will be derived calculated columns.
+- I’ll always need the fact_sales_monthly table for calculating pre & post invoice deduction columns since we have their values in percentage. To calculate the actual values I need to perform calculations on the gross_sales column. However each such subsequent calculation by nature would required stacking either multiple CTEs or Subqueries since joining the fact_sales_monthly table with other table and then calculating the value for the deduction percentage cannot be done in the same query since there will be derived calculated columns.
 
-For such use case, the most optimum way would be to create specific use case Database views that have the ability to provide virtual tables for deduction calculations to be performed on.
+- For such use case, the most optimum way would be to create specific use case Database views that have the ability to provide virtual tables for deduction calculations to be performed on.
 
 ### 7.1 View: Gross Sales
 
@@ -386,9 +386,9 @@ CREATE VIEW `net_sales` AS
 ---
 
 ## 8. Top Customers, Products & Markets Reports
-As a Product Owner, I want a report for Top Markets, Products & Customers by Net Sales (in millions) for a given financial year so that I can have a holistic view of our financial performance and can take appropriate actions to address any potential issues. Also created stored procedures so they can be rerun as required.
+- As a Product Owner, I want a report for Top Markets, Products & Customers by Net Sales (in millions) for a given financial year so that I can have a holistic view of our financial performance and can take appropriate actions to address any potential issues. Also created stored procedures so they can be rerun as required.
 
-All of the below reports can be generated for the Bottom parameters by reversing the Order By field direction to Descending.
+- All of the below reports can be generated for the Bottom parameters by reversing the Order By field direction to Descending.
 
 ### 8.1 Top Markets report for a given FY by Net Sales (in millions):
 
