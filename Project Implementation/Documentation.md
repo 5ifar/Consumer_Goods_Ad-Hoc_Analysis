@@ -23,6 +23,14 @@
   - [7.2 View: Sales Pre Invoice Discount](#72-view-sales-pre-invoice-discount)
   - [7.3 View: Sales Post Invoice Discount](#73-view-sales-post-invoice-discount)
   - [7.4 View: Net Sales](#74-view-net-sales)
+- [8. Top Customers, Products & Markets Reports](#8-top-customers-products--markets-reports)
+  - [8.1 Top Markets report for a given FY by Net Sales (in millions)](#81-top-markets-report-for-a-given-fy-by-net-sales-in-millions)
+  - [8.2 Top Customers report for a given FY by Net Sales (in millions)](#82-top-customers-report-for-a-given-fy-by-net-sales-in-millions)
+  - [8.3 Top Products report for a given FY by Net Sales (in millions)](#83-top-products-report-for-a-given-fy-by-net-sales-in-millions)
+  - [8.4 Top Customer-wise Net Sales % contribution report for a given FY](#84-top-customer-wise-net-sales--contribution-report-for-a-given-fy)
+  - [8.5 Top Customer-wise Net Sales % contribution report per Region for a given FY](#85-top-customer-wise-net-sales--contribution-report-per-region-for-a-given-fy)
+  - [8.6 Top Products report in each Division for a given FY by their Quantity Sold](#86-top-products-report-in-each-division-for-a-given-fy-by-their-quantity-sold)
+  - [8.7 Top Markets report in each Region for a given FY by their Gross Sales](#87-top-markets-report-in-each-region-for-a-given-fy-by-their-gross-sales)
 
 ---
 
