@@ -302,3 +302,49 @@ END
 - I’ll just add the same fiscal_year (YEAR) column with Generative Constraint with Expression: `YEAR(DATE_ADD(calendar_date, INTERVAL 4 MONTH))` to the fact_sales_monthly table after the date column.
 
 ---
+
+## 7. Configuring Database Views
+- I’ll always need the fact_sales_monthly table for calculating pre & post invoice deduction columns since we have their values in percentage. To calculate the actual values I need to perform calculations on the gross_sales column. However each such subsequent calculation by nature would required stacking either multiple CTEs or Subqueries since joining the fact_sales_monthly table with other table and then calculating the value for the deduction percentage cannot be done in the same query since there will be derived calculated columns.
+- For such use case, the most optimum way would be to create specific use case Database views that have the ability to provide virtual tables for deduction calculations to be performed on.
+
+### 7.1 View: gross_sales
+
+```sql
+CREATE VIEW `gross_sales` AS
+	SELECT 
+		fsm.date AS month, 
+		fsm.fiscal_year, 
+		fsm.customer_code, dc.customer, 
+		dc.market, 
+		fsm.product_code, dp.product, dp.variant, 
+		fsm.sold_quantity, 
+		ROUND(fgp.gross_price, 2) AS gross_price, 
+		ROUND((fsm.sold_quantity * fgp.gross_price), 2) AS gross_sales
+	FROM fact_sales_monthly AS fsm
+	JOIN dim_customer AS dc ON fsm.customer_code = dc.customer_code
+	JOIN dim_product AS dp ON fsm.product_code = dp.product_code
+	JOIN fact_gross_price AS fgp ON fsm.product_code = fgp.product_code AND fsm.fiscal_year = fgp.fiscal_year;
+```
+
+### 7.2 View: sales_pre_inv_discount
+
+```sql
+CREATE VIEW `sales_pre_inv_discount` AS
+	SELECT 
+		fsm.date AS month,
+		fsm.fiscal_year,
+		fsm.customer_code,
+		dc.market,
+		fsm.product_code, dp.product, dp.variant,
+		fsm.sold_quantity,
+		ROUND(fgp.gross_price, 2) AS gross_price,
+		ROUND((fsm.sold_quantity * fgp.gross_price), 2) AS gross_sales,
+		ROUND(fprid.pre_invoice_discount_pct, 2)
+	FROM fact_sales_monthly AS fsm
+	JOIN dim_customer AS dc ON fsm.customer_code = dc.customer_code
+	JOIN dim_product AS dp ON fsm.product_code = dp.product_code
+	JOIN fact_gross_price AS fgp ON fsm.product_code = fgp.product_code AND fsm.fiscal_year = fgp.fiscal_year
+	JOIN fact_pre_invoice_deductions AS fprid ON fsm.customer_code = fprid.customer_code AND fsm.fiscal_year = fprid.fiscal_year;
+```
+
+
