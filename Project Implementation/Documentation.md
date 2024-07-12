@@ -18,6 +18,11 @@
 - [6. Query Optimization](#6-query-optimization)
   - [6.1 Creating dim_date table](#61-creating-dim_date-table)
   - [6.2 Modifying fact_sales_monthly table to include fiscal_year](#62-modifying-fact_sales_monthly-table-to-include-fiscal_year)
+- [7. Configuring Database Views](#7-configuring-database-views)
+  - [7.1 View: Gross Sales](#71-view-gross-sales)
+  - [7.2 View: Sales Pre Invoice Discount](#72-view-sales-pre-invoice-discount)
+  - [7.3 View: Sales Post Invoice Discount](#73-view-sales-post-invoice-discount)
+  - [7.4 View: Net Sales](#74-view-net-sales)
 
 ---
 
@@ -307,7 +312,7 @@ END
 - I’ll always need the fact_sales_monthly table for calculating pre & post invoice deduction columns since we have their values in percentage. To calculate the actual values I need to perform calculations on the gross_sales column. However each such subsequent calculation by nature would required stacking either multiple CTEs or Subqueries since joining the fact_sales_monthly table with other table and then calculating the value for the deduction percentage cannot be done in the same query since there will be derived calculated columns.
 - For such use case, the most optimum way would be to create specific use case Database views that have the ability to provide virtual tables for deduction calculations to be performed on.
 
-### 7.1 View: gross_sales
+### 7.1 View: Gross Sales
 
 ```sql
 CREATE VIEW `gross_sales` AS
@@ -326,7 +331,7 @@ CREATE VIEW `gross_sales` AS
 	JOIN fact_gross_price AS fgp ON fsm.product_code = fgp.product_code AND fsm.fiscal_year = fgp.fiscal_year;
 ```
 
-### 7.2 View: sales_pre_inv_discount
+### 7.2 View: Sales Pre Invoice Discount
 
 ```sql
 CREATE VIEW `sales_pre_inv_discount` AS
@@ -347,7 +352,7 @@ CREATE VIEW `sales_pre_inv_discount` AS
 	JOIN fact_pre_invoice_deductions AS fprid ON fsm.customer_code = fprid.customer_code AND fsm.fiscal_year = fprid.fiscal_year;
 ```
 
-### 7.3 View: sales_post_inv_discount
+### 7.3 View: Sales Post Invoice Discount
 
 ```sql
 CREATE VIEW `sales_post_inv_discount` AS
@@ -367,7 +372,7 @@ CREATE VIEW `sales_post_inv_discount` AS
 		ON fpoid.customer_code = spid.customer_code AND fpoid.product_code = spid.product_code AND fpoid.date = spid.month;
 ```
 
-### 7.4 View: net_sales
+### 7.4 View: Net Sales
 
 ```sql
 CREATE VIEW `net_sales` AS
@@ -377,3 +382,4 @@ CREATE VIEW `net_sales` AS
 	FROM sales_post_inv_discount;
 ```
 
+---
