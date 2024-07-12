@@ -454,3 +454,83 @@ BEGIN
 END
 ```
 
+### 8.4 Top Customer-wise Net Sales % contribution report for a given FY:
+
+```sql
+CREATE PROCEDURE `get_top_n_customers_by_net_sales_pct_contribution` (
+	in_fiscal_year INT,
+	in_top_n INT
+)
+BEGIN
+	WITH customer_net_sales AS (
+		SELECT
+			customer,
+			ROUND(SUM(net_sales)/1000000, 2) as net_sales_mil
+		FROM net_sales AS ns
+		JOIN dim_customer AS dc ON ns.customer_code = dc.customer_code
+		WHERE ns.fiscal_year = in_fiscal_year
+		GROUP BY customer
+	)
+	select
+		*,
+		(net_sales_mil * 100) / SUM(net_sales_mil) OVER() AS net_sales_pct
+	FROM customer_net_sales
+	ORDER BY net_sales_mil DESC
+	LIMIT in_top_n;
+END
+```
+
+### 8.5 Top Customer-wise Net Sales % contribution report per Region for a given FY:
+
+- This query provides Customer-wise Net Sales % contribution report for all Regions for FY 2021:
+
+```sql
+WITH customer_net_sales AS (
+	SELECT
+		dc.customer, dc.region,
+		ROUND(SUM(ns.net_sales)/1000000, 2) as net_sales_mil
+	FROM net_sales AS ns
+	JOIN dim_customer AS dc ON ns.customer_code = dc.customer_code
+	WHERE ns.fiscal_year = 2021
+	GROUP BY dc.customer, dc.region
+)
+select
+	*,
+	(net_sales_mil * 100) / SUM(net_sales_mil) OVER(PARTITION BY region) AS regional_net_sales_pct
+FROM customer_net_sales
+ORDER BY region ASC, regional_net_sales_pct DESC;
+```
+
+- Evolved above query further to create a Stored Procedure to extract Top n Customer-wise Net Sales % contribution Report for a particular Region for a given FY:
+
+```sql
+CREATE PROCEDURE `get_top_n_customers_by_regional_net_sales_pct_contribution` (
+	in_region VARCHAR(45),
+	in_fiscal_year INT,
+	in_top_n INT
+)
+BEGIN
+	# Default region set to APAC
+	IF in_region = "" THEN
+		SET in_region = "APAC";
+	END IF;
+
+	WITH customer_net_sales AS (
+		SELECT
+			dc.customer, dc.region,
+			ROUND(SUM(ns.net_sales)/1000000, 2) as net_sales_mil
+		FROM net_sales AS ns
+		JOIN dim_customer AS dc ON ns.customer_code = dc.customer_code
+		WHERE ns.fiscal_year = in_fiscal_year
+		GROUP BY dc.customer, dc.region
+	)
+	select
+		*,
+		(net_sales_mil * 100) / SUM(net_sales_mil) OVER(PARTITION BY region) AS regional_net_sales_pct
+	FROM customer_net_sales
+    WHERE region = in_region
+	ORDER BY region ASC, regional_net_sales_pct DESC
+    LIMIT in_top_n;
+END
+```
+
