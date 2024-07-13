@@ -1,0 +1,104 @@
+customer,region,net_sales_mil,regional_net_sales_pct
+"Amazon ",APAC,57.50,13.016707
+"Atliq Exclusive",APAC,51.53,11.665233
+"Atliq e Store",APAC,36.87,8.346539
+Leader,APAC,24.58,5.564359
+Sage,APAC,22.90,5.184045
+Neptune,APAC,20.96,4.744873
+Electricalsocity,APAC,16.21,3.669579
+Propel,APAC,14.14,3.200978
+Synthetic,APAC,14.14,3.200978
+Flipkart,APAC,12.93,2.927061
+Novus,APAC,12.89,2.918006
+Expression,APAC,12.83,2.904423
+Girias,APAC,11.31,2.560330
+"Vijay Sales",APAC,11.20,2.535428
+"Reliance Digital",APAC,11.13,2.519582
+Ebay,APAC,11.08,2.508263
+Electricalslytical,APAC,11.01,2.492416
+Lotus,APAC,10.54,2.386019
+Ezone,APAC,10.34,2.340743
+Viveks,APAC,10.15,2.297732
+Croma,APAC,9.91,2.243401
+Zone,APAC,6.88,1.557477
+"Acclaimed Stores",APAC,5.75,1.301671
+Taobao,APAC,4.30,0.973423
+Digimarket,APAC,3.97,0.898719
+"Forward Stores",APAC,3.85,0.871553
+Insight,APAC,3.59,0.812695
+Sound,APAC,3.42,0.774211
+"Surface Stores",APAC,2.79,0.631593
+"Logic Stores",APAC,2.21,0.500294
+Path,APAC,1.93,0.436909
+"Epic Stores",APAC,1.92,0.434645
+Control,APAC,1.62,0.366732
+"Nomad Stores",APAC,1.55,0.350885
+All-Out,APAC,1.07,0.242224
+"Electricalsbea Stores",APAC,0.95,0.215059
+"Flawless Stores",APAC,0.90,0.203740
+"Info Stores",APAC,0.89,0.201476
+"Amazon ",EU,19.83,9.872057
+"Atliq e Store",EU,19.79,9.852143
+"Atliq Exclusive",EU,13.37,6.656046
+UniEuro,EU,9.65,4.804102
+Expert,EU,8.37,4.166874
+"Chip 7",EU,7.25,3.609300
+"Radio Popular",EU,6.96,3.464928
+"Media Markt",EU,6.90,3.435057
+Elkjøp,EU,6.75,3.360382
+Sorefoz,EU,6.13,3.051725
+Coolblue,EU,5.60,2.787873
+Elite,EU,5.41,2.693284
+Boulanger,EU,5.30,2.638522
+Mbit,EU,5.18,2.578782
+Euronics,EU,5.12,2.548912
+"Electricalsquipo Stores",EU,4.76,2.369692
+Electricalslytical,EU,4.58,2.280082
+"Atlas Stores",EU,4.18,2.080948
+"Logic Stores",EU,4.12,2.051078
+Chiptec,EU,3.92,1.951511
+Fnac-Darty,EU,3.77,1.876836
+"Epic Stores",EU,3.53,1.757356
+"Electricalslance Stores",EU,3.07,1.528352
+"Argos (Sainsbury's)",EU,2.97,1.478568
+Power,EU,2.59,1.289391
+"Currys (Dixons Carphone)",EU,2.42,1.204759
+"Electricalsara Stores",EU,2.41,1.199781
+Sound,EU,2.24,1.115149
+Synthetic,EU,1.95,0.970777
+Flipkart,EU,1.93,0.960820
+"Integration Stores",EU,1.87,0.930950
+Relief,EU,1.69,0.841340
+"Reliance Digital",EU,1.65,0.821427
+Billa,EU,1.65,0.821427
+"Unity Stores",EU,1.59,0.791557
+Otto,EU,1.57,0.781600
+Saturn,EU,1.56,0.776622
+"Info Stores",EU,1.51,0.751730
+Notebillig,EU,1.48,0.736795
+"Flawless Stores",EU,1.47,0.731817
+"Forward Stores",EU,1.47,0.731817
+Digimarket,EU,1.45,0.721860
+"Premium Stores",EU,1.40,0.696968
+Nova,EU,0.46,0.229004
+"Amazon ",LATAM,1.53,48.417722
+"Atliq e Store",LATAM,1.10,34.810127
+"Electricalsbea Stores",LATAM,0.53,16.772152
+"Amazon ",NA,30.30,17.058890
+"Atliq Exclusive",NA,15.01,8.450625
+walmart,NA,12.60,7.093796
+"Atliq e Store",NA,12.38,6.969936
+Costco,NA,12.13,6.829186
+Staples,NA,11.45,6.446346
+Flipkart,NA,10.36,5.832677
+Path,NA,9.04,5.089517
+Ebay,NA,8.77,4.937507
+"Acclaimed Stores",NA,8.48,4.774237
+Control,NA,8.42,4.740457
+BestBuy,NA,8.23,4.633487
+"Circuit City",NA,8.09,4.554667
+"Radio Shack",NA,7.15,4.025448
+Sage,NA,4.21,2.370229
+"Nomad Stores",NA,3.70,2.083099
+"Premium Stores",NA,3.68,2.071839
+Relief,NA,3.62,2.038059
