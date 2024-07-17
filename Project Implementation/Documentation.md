@@ -33,6 +33,7 @@
   - [8.7 Top Markets report in each Region for a given FY by their Gross Sales](#87-top-markets-report-in-each-region-for-a-given-fy-by-their-gross-sales)
 - [9. Supply Chain Analytics](#9-supply-chain-analytics)
   - [9.1 Actual & Estimate Sales Qty Helper Table](#91-actual--estimate-sales-qty-helper-table)
+  - [9.2 Auto Updating Actual & Estimate Sales Qty Helper Table using Database Triggers](#92-auto-updating-actual--estimate-sales-qty-helper-table-using-database-triggers)
 
 ---
 
@@ -658,3 +659,32 @@ SET forecast_quantity = 0
 WHERE forecast_quantity IS NULL;
 ```
 
+### 9.2 Auto Updating Actual & Estimate Sales Qty Helper Table using Database Triggers:
+- While the helper table fact_actuals_estimates pulls data from both fact_sales_monthly and fact_forecast_monthly tables, in future when any of these parent tables get updated the child table would not get updated automatically. To automate this I decided to use AFTER INSERT Database triggers to insert corresponding new records in this table whenever the parent tables are updated.
+1. **fact_sales_monthly_AFTER_INSERT Trigger:**
+
+Trigger to auto update new records to fact_actuals_estimates table when fact_sales_monthly table is updated. Skip forecast_quantity column as it will be updated later. Skip fiscal_year as it’s a generated column. Navigate to fact_sales_monthly table schema → Go to Trigger Tab → Select Trigger Type → Click on + icon → Trigger Code → Apply
+
+```sql
+CREATE DEFINER = CURRENT_USER TRIGGER `gdb0041`.`fact_sales_monthly_AFTER_INSERT` AFTER INSERT ON `fact_sales_monthly` FOR EACH ROW
+BEGIN
+	INSERT INTO fact_actuals_estimates
+		(date, product_code, customer_code, sold_quantity)
+	VALUES(NEW.date, NEW.product_code, NEW.customer_code, NEW.sold_quantity)
+	ON DUPLICATE KEY UPDATE sold_quantity = values(sold_quantity);
+END
+```
+
+2. **fact_forecast_monthly_AFTER_INSERT Trigger:**
+
+Trigger to auto update new records to fact_actuals_estimates table when fact_forecast_monthly table is updated. Skip fiscal_year as it’s a generated column. Navigate to fact_forecast_monthly table schema → Go to Trigger Tab → Select Trigger Type → Click on + icon → Trigger Code → Apply
+
+```sql
+CREATE DEFINER = CURRENT_USER TRIGGER `gdb0041`.`fact_forecast_monthly_AFTER_INSERT` AFTER INSERT ON `fact_forecast_monthly` FOR EACH ROW
+BEGIN
+	INSERT INTO fact_actuals_estimates
+		(date, product_code, customer_code, forecast_quantity)
+	VALUES(NEW.date, NEW.product_code, NEW.customer_code, NEW.forecast_quantity)
+	ON DUPLICATE KEY UPDATE forecast_quantity = values(forecast_quantity);
+END
+```
