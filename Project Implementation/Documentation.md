@@ -31,6 +31,8 @@
   - [8.5 Top Customer-wise Net Sales % contribution report per Region for a given FY](#85-top-customer-wise-net-sales--contribution-report-per-region-for-a-given-fy)
   - [8.6 Top Products report in each Division for a given FY by their Quantity Sold](#86-top-products-report-in-each-division-for-a-given-fy-by-their-quantity-sold)
   - [8.7 Top Markets report in each Region for a given FY by their Gross Sales](#87-top-markets-report-in-each-region-for-a-given-fy-by-their-gross-sales)
+- [9. Supply Chain Analytics](#9-supply-chain-analytics)
+  - [9.1 Actual & Estimate Sales Qty Helper Table](#91-actual--estimate-sales-qty-helper-table)
 
 ---
 
@@ -597,3 +599,62 @@ END
 ```
 
 ---
+
+## 9. Supply Chain Analytics
+Domain Knowledge applied:
+- Supply Chain team success is measured by high forecast accuracy. Their job is to ensure neither out of stock or excess inventory.
+- Net Error = Forecast - Actuals. Both over and under production of inventory is an issue hence we always take absolute values of Net error when calculating accuracy.
+- Both Net Error % and Absolute Net Error % are always calculated over Forecast figures. Absolute Net Error % = (Total Absolute Net Error/Total Forecast)* 100
+- Forecast accuracy is inversely proportional to Net Error. Forecast Accuracy = 1 - Absolute Net Error %
+
+### 9.1 Actual & Estimate Sales Qty Helper Table:
+- The fact_sales_monthly table has the sold_quantity field while the fact_forecast_monthly table has the forecast_quantity field. I will need both of these field to first calculate Absolute Net Error and then eventually the Forecast Accuracy % which is a relevant KPI for the Supply Chain Team. For this use I opted to join both the tables into a single Helper table containing both field in favor of quicker execution time at the cost of database size.
+- The last date in the fact_forecast_monthly table is 1st August 2022 while in the fact_sales_monthly table is 1st December 2021. This indicates that we have an additional 8 months of future sales forecast data. Total Records: fact_sales_monthly - 1425706 & fact_forecast_monthly - 1885941
+- Total Records Calculation:
+    
+  fact_sales_monthly count: 1425706     |     Inner Join with fact_forecast_monthly count: 1390837     |     Difference: 34869
+    
+  fact_forecast_monthly count: 1885941     |     Inner Join with fact_sales_monthly count: 1390837     |     Difference: 495104
+    
+- The above calculation shows me that there are total 529973 rows that are present in either one of the tables. In such cases it is recommended to consult the Business Manager to discuss addressing this discrepancy. For the scope of this project I decided to take the approach that for either of the two table wherever the sold/forecast quantity is not present (i.e NULL) it be considered as 0.
+- Since I basically now need all common & unique rows from both tables, I’ll take a Union of Right & Left Outer Joins between the fact_sales_monthly & fact_forecast_monthly tables. An easier way would have been to simply do a Full Outer Join to get the same result but this longer query has been written as proof of concept for my business logic.
+
+```sql
+DROP TABLE IF EXISTS fact_actuals_estimates;
+
+CREATE TABLE fact_actuals_estimates 
+	(SELECT 
+		fsm.date AS date,
+		fsm.fiscal_year AS fiscal_year,
+		fsm.product_code AS product_code,
+		fsm.customer_code AS customer_code,
+		fsm.sold_quantity AS sold_quantity,
+		ffm.forecast_quantity AS forecast_quantity
+	FROM fact_sales_monthly AS fsm
+	LEFT JOIN fact_forecast_monthly AS ffm USING (date , customer_code , product_code)
+	) 
+	UNION
+	(SELECT 
+		ffm.date AS date,
+		ffm.fiscal_year AS fiscal_year,
+		ffm.product_code AS product_code,
+		ffm.customer_code AS customer_code,
+		fsm.sold_quantity AS sold_quantity,
+		ffm.forecast_quantity AS forecast_quantity
+	FROM fact_forecast_monthly AS ffm
+	LEFT JOIN fact_sales_monthly AS fsm USING (date , customer_code , product_code));
+```
+
+- Change the fact_actuals_estimates Table Schema settings to set date, product_code & customer_code as Primary Keys. Delete the existing fiscal_year column and recreate it as a generated column using the same formula used in the fact_sales _monthly table (year((date + interval 4 month))) so as to save space by not having to store redundant date/fy data.
+- Update fact_actuals_estimates table to replace all NULL sold/forecast quantities as 0.
+
+```sql
+UPDATE fact_actuals_estimates
+SET sold_quantity = 0
+WHERE sold_quantity IS NULL;
+
+UPDATE fact_actuals_estimates
+SET forecast_quantity = 0
+WHERE forecast_quantity IS NULL;
+```
+
