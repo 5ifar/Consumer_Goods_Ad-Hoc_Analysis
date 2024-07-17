@@ -34,6 +34,7 @@
 - [9. Supply Chain Analytics](#9-supply-chain-analytics)
   - [9.1 Actual & Estimate Sales Qty Helper Table](#91-actual--estimate-sales-qty-helper-table)
   - [9.2 Auto Updating Actual & Estimate Sales Qty Helper Table using Database Triggers](#92-auto-updating-actual--estimate-sales-qty-helper-table-using-database-triggers)
+  - [9.3 Forecast Accuracy Report for a given FY by Customer](#93-forecast-accuracy-report-for-a-given-fy-by-customer)
 
 ---
 
@@ -686,5 +687,37 @@ BEGIN
 		(date, product_code, customer_code, forecast_quantity)
 	VALUES(NEW.date, NEW.product_code, NEW.customer_code, NEW.forecast_quantity)
 	ON DUPLICATE KEY UPDATE forecast_quantity = values(forecast_quantity);
+END
+```
+
+### 9.3 Forecast Accuracy Report for a given FY by Customer:
+In cases where the Forecast Accuracy values are calculated as negative values, its logical that since more than 100% error is basically also 100% error so I decided to replace such values by 0% as the Forecast Accuracy.
+
+```sql
+CREATE PROCEDURE `get_forecast_accuracy`(
+	in_fiscal_year INT
+)
+BEGIN
+	WITH forecast_metrics AS (
+		SELECT
+			fae.customer_code AS customer_code,
+			dc.customer AS customer_name,
+			dc.market AS market,
+      SUM(fae.sold_quantity) AS total_sold_qty,
+			SUM(fae.forecast_quantity) AS total_forecast_qty,
+			SUM(fae.forecast_quantity - fae.sold_quantity) AS net_error,
+			ROUND(SUM(fae.forecast_quantity - fae.sold_quantity) * 100 / SUM(fae.forecast_quantity), 2) AS net_error_pct,
+			SUM(ABS(fae.forecast_quantity - fae.sold_quantity)) AS abs_error,
+			ROUND(SUM(ABS(fae.forecast_quantity - sold_quantity)) * 100 / SUM(fae.forecast_quantity), 2) AS abs_error_pct
+		FROM fact_actuals_estimates AS fae
+		JOIN dim_customer AS dc ON fae.customer_code = dc.customer_code
+		WHERE fae.fiscal_year = in_fiscal_year
+		GROUP BY fae.customer_code
+	)
+	SELECT 
+		*,
+		IF (abs_error_pct > 100, 0, 100.00 - abs_error_pct) AS forecast_accuracy
+	FROM forecast_metrics
+	ORDER BY forecast_accuracy DESC;
 END
 ```
