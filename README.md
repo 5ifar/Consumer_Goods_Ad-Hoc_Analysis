@@ -155,4 +155,73 @@ GROUP BY segment
 ORDER BY prod_cnt DESC;
 ```
 
+### 4. Follow-up: Which segment had the most percentage increase in unique products in 2021 vs 2020?
 
+```sql
+WITH uniqsegprod_2020 AS (
+	SELECT 
+		segment AS seg_2020,
+		COUNT(DISTINCT(fsm.product_code)) AS prodcnt_2020
+	FROM dim_product AS dp
+	JOIN fact_sales_monthly AS fsm USING (product_code)
+	WHERE fsm.fiscal_year = 2020
+	GROUP BY segment
+), 
+uniqsegprod_2021 AS (
+	SELECT 
+		segment AS seg_2021,
+		COUNT(DISTINCT(fsm.product_code)) AS prodcnt_2021
+	FROM dim_product AS dp
+	JOIN fact_sales_monthly AS fsm USING (product_code)
+	WHERE fsm.fiscal_year = 2021
+	GROUP BY segment
+)
+SELECT
+	seg_2020 AS segment,
+	prodcnt_2020, prodcnt_2021,
+	ROUND(((prodcnt_2021-prodcnt_2020)/prodcnt_2020)*100, 2) AS segprodcnt_inc_pct
+FROM uniqsegprod_2020 AS usp_2020, uniqsegprod_2021 AS usp_2021
+WHERE usp_2020.seg_2020 = usp_2021.seg_2021
+ORDER BY segprodcnt_inc_pct DESC;
+```
+
+### 5. List the products with the highest and lowest manufacturing costs.
+
+```sql
+WITH prod_manufacost AS (
+	SELECT
+		product_code, product, manufacturing_cost
+	FROM dim_product
+	JOIN fact_manufacturing_cost USING (product_code)
+)
+(SELECT *, "Highest Cost" AS overall FROM prod_manufacost ORDER BY manufacturing_cost DESC LIMIT 1)
+UNION
+(SELECT *, "Lowest Cost" AS overall FROM prod_manufacost ORDER BY manufacturing_cost ASC LIMIT 1);
+```
+
+### 6. Generate a report which contains the top 5 customers who received a higher than average pre_invoice_discount_pct for the fiscal year 2021 in the Indian market.
+
+```sql
+SELECT 
+	fprid.customer_code, dc.customer,
+	fprid.pre_invoice_discount_pct AS high_pre_inv_discount_pct
+FROM dim_customer AS dc
+JOIN fact_pre_invoice_deductions AS fprid USING (customer_code)
+WHERE fprid.fiscal_year = 2021 AND dc.market = "India" AND pre_invoice_discount_pct > (SELECT AVG(pre_invoice_discount_pct) FROM fact_pre_invoice_deductions WHERE fiscal_year = 2021)
+ORDER BY high_pre_inv_discount_pct DESC 
+LIMIT 5
+```
+
+### 7. Get the complete report of the Gross sales amount for the customer “Atliq Exclusive” for each month. 
+This analysis helps to get an idea of low and high-performing months and take strategic decisions.
+
+```sql
+SELECT
+	CONCAT(MONTHNAME(month), ' (', YEAR(month), ')') AS month,
+	fiscal_year,
+	SUM(gross_sales) AS gross_sales_amount
+FROM gross_sales
+WHERE customer = "Atliq Exclusive"
+GROUP BY month, fiscal_year
+ORDER BY gross_sales_amount DESC;
+```
