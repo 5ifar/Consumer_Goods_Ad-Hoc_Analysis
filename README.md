@@ -54,6 +54,8 @@ Please find the resource links for the project below:
 5. Data Visualization
 6. Documentation
 
+---
+
 ## About the Dataset:
 ### Data Sources: Finance & Supply Chain
 The dataset contains 9 tables in total, namely -
@@ -77,6 +79,8 @@ ROCCC Evaluation:
 - Comprehensiveness: HIGH - Total 9 Files with a total of around 5.3 Million records were provided. Dataset contains multiple dimension parameters for Customers & Products as well as comprehensive Finance & Supply Chain transaction data.
 - Current: LOW - Dataset was updated upto FY 2022 i.e almost 2 years old. So its not very relevant. Any trends observed and insights gained need to be comprehended as a general (not FY-specific) trend.
 - Citation: LOW - No official citation/reference available.
+
+---
 
 ## Project Implementation:
 Please find the documentation links for the project phase-wise implementation below:
@@ -113,3 +117,42 @@ Please find the documentation links for the project phase-wise implementation be
   - [9.2 Auto Updating Actual & Estimate Sales Qty Helper Table using Database Triggers](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Project%20Implementation/Documentation.md#92-auto-updating-actual--estimate-sales-qty-helper-table-using-database-triggers)
   - [9.3 Forecast Accuracy Report for a given FY by Customer](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Project%20Implementation/Documentation.md#93-forecast-accuracy-report-for-a-given-fy-by-customer)
   - [9.4 Comparative Forecast Accuracy Report across consecutive FY by Customer](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Project%20Implementation/Documentation.md#94-comparative-forecast-accuracy-report-across-consecutive-fy-by-customer)
+
+---
+
+## Ad-Hoc Analysis Insights:
+### 1. Provide the list of markets in which customer "Atliq Exclusive" operates its business in the APAC region.
+
+```sql
+SELECT 
+	DISTINCT(market) AS atliq_exclusive_markets 
+FROM gdb0041.dim_customer
+WHERE customer = "Atliq Exclusive" AND region = "APAC";
+```
+
+### 2. What is the percentage increase of unique product in 2021 vs. 2020?
+
+```sql
+WITH uniqprod_2020 AS (
+	SELECT COUNT(DISTINCT(product_code)) AS prodcnt_2020 FROM fact_sales_monthly WHERE fiscal_year = 2020
+), uniqprod2021 AS (
+	SELECT COUNT(DISTINCT(product_code)) AS prodcnt_2021 FROM fact_sales_monthly WHERE fiscal_year = 2021
+)
+SELECT 
+	prodcnt_2020, prodcnt_2021, 
+	ROUND(((prodcnt_2021 - prodcnt_2020)/prodcnt_2020)*100, 2) AS prodcnt_inc_pct 
+FROM uniqprod_2020, uniqprod2021;
+```
+
+### 3. Provide a report with all the unique product counts for each segment and sort them in descending order of product counts.
+
+```sql
+SELECT 
+	segment,
+	COUNT(product_code) AS prod_cnt
+FROM dim_product
+GROUP BY segment
+ORDER BY prod_cnt DESC;
+```
+
+
