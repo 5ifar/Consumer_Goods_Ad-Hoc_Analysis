@@ -38,7 +38,7 @@ Please find the resource links for the project below:
   - [Data Integrity](#data-integrity)
 - [...Data Model - ERD to be added...]()
 - [Project Implementation](#project-implementation)
-- [...Analysis Insights to be added...]()
+- [Ad-Hoc Analysis Insights](#ad-hoc-analysis-insights)
 
 ## Tools used:
 1. MySQL - for Data Cleaning, Data Manipulation, Normalization and Analysis process
