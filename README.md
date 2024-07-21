@@ -43,7 +43,7 @@ Please find the resource links for the project below:
 ## Tools used:
 1. MySQL - for Data Cleaning, Data Manipulation, Normalization and Analysis process
 2. Datawrapper - to create data visualizations
-3. Power BI - to create dashboard
+3. Powerpoint - to create project presentation
 4. GitHub - for documentation
 
 ## Skills & Methodologies implemented:
