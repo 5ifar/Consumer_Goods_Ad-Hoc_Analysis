@@ -238,3 +238,30 @@ WHERE dc.customer = 'Atliq Exclusive'
 GROUP BY Month, Fiscal_Year
 ORDER BY Fiscal_Year;
 ```
+
+### 8. Which quarter of 2020, got the maximum total_sold_quantity?
+
+```sql
+-- Method 1: Using the pre-configured get_fiscal_quarter function.
+SELECT 
+	get_fiscal_quarter(date) AS FQ,
+	SUM(sold_quantity) AS total_sold_qty
+FROM fact_sales_monthly
+WHERE fiscal_year = 2020
+GROUP BY FQ
+ORDER BY total_sold_qty DESC;
+
+-- Method 2: Without using any function.
+SELECT
+	CASE
+		WHEN date BETWEEN '2019-09-01' AND '2019-11-01' THEN 'Q1'
+		WHEN date BETWEEN '2019-12-01' AND '2020-02-01' THEN 'Q2'
+		WHEN date BETWEEN '2020-03-01' AND '2020-05-01' THEN 'Q3'
+		WHEN date BETWEEN '2020-06-01' AND '2020-08-01' THEN 'Q4'
+	END AS FQ,
+	ROUND(SUM(sold_quantity)/1000000, 2) AS total_sold_qty_mln
+FROM fact_sales_monthly
+WHERE fiscal_year = 2020
+GROUP BY FQ
+ORDER BY total_sold_qty_mln DESC;
+```
