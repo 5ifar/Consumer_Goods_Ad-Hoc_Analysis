@@ -1,6 +1,6 @@
 # <img src="https://miro.medium.com/v2/resize:fit:1400/1*8bUjUiCWk0VhS8-lgAj0Og.png" width="4%" height="4%"> Consumer Goods: Ad-Hoc Analysis
 This repository serves as my documentation for the Consumer Goods: Ad-Hoc Analysis - MySQL Project.
-It was created as a self-learning project for the course: [SQL Beginner to Advanced For Data Professionals](https://codebasics.io/courses/sql-beginner-to-advanced-for-data-professionals) by [Codebasics](https://codebasics.io/).
+It was created as part of [Resume Project Challenge 4: Provide Insights to Management in Consumer Goods Domain](https://codebasics.io/challenge/codebasics-resume-project-challenge/7) by [Codebasics](https://codebasics.io/).
 
 It showcases my competancy to work with MySQL Workbench and demonstrates my proficiency in essential SQL concepts like **Selection, Filtering, Aggregation, Grouping, Joining, Conditional Expressions & CRUD Operations** as well as advanced SQL concepts like **Sub Queries, CTEs (Common Table Expression), Views, Temporary tables, Window Functions, UDFs (User-defined Functions), Stored Procedures and Database Triggers**.
 
