@@ -41,6 +41,7 @@ Please find the resource links for the project below:
 - [...Data Model - ERD to be added...]()
 - [Project Implementation](#project-implementation)
 - [Ad-Hoc Analysis Insights](#ad-hoc-analysis-insights)
+- [Conclusion](#conclusion)
 
 ## Tools used:
 1. MySQL Workbench - for Data Cleaning, Data Manipulation, Normalization and Analysis process
@@ -314,4 +315,16 @@ div_sold_qty_ranking AS (
 )
 SELECT * FROM div_sold_qty_ranking WHERE sold_qty_div_rank < 4;
 ```
+---
+
+## Conclusion:
+Conducted a comprehensive Ad-Hoc SQL analysis on Atliq Hardware Consumer Goods Sales, Product & Customer data. These insights will enable Atliq Hardwares to make informed decisions, optimize operations, and drive growth in the competitive computer hardware market.
+
+Recommendations for AtliQ focused on:
+1. Enhance product offerings to meet market demands by introducing trending products in lower-count segments like Desktop, Networking, and Storage segments.
+2. Engage in negotiations to secure more favorable terms with high pre-invoice discount customers like Flipkart, Viveks & Ezone by implementing loyalty programs or volume-based incentives to maintain customer satisfaction while reducing the average discount rate thereby improving profit margins.
+3. Implement an strategic marketing strategy across multiple channels strengthening key sales channel relationships and develop a strong core brand identity to communicate unique value.
+4. Offer competitive pricing and attractive promotions.
+5. Need for targeted R&D investments
+
 ---
