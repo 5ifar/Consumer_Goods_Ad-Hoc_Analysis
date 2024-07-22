@@ -135,6 +135,7 @@ SELECT
 FROM gdb0041.dim_customer
 WHERE customer = "Atliq Exclusive" AND region = "APAC";
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/atliq-exclusive-apac-markets.png" width="30%" height="30%"> </div>
 
 ### 2. What is the percentage increase of unique product in 2021 vs. 2020?
 
@@ -149,6 +150,7 @@ SELECT
 	ROUND(((prodcnt_2021 - prodcnt_2020)/prodcnt_2020)*100, 2) AS prodcnt_inc_pct 
 FROM uniqprod_2020, uniqprod2021;
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/unique-products-2020-vs-2021.png" width="20%" height="20%"> </div>
 
 ### 3. Provide a report with all the unique product counts for each segment and sort them in descending order of product counts.
 
@@ -160,6 +162,7 @@ FROM dim_product
 GROUP BY segment
 ORDER BY prod_cnt DESC;
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/unique-product-count-by-segments.png" width="50%" height="50%"> </div>
 
 ### 4. Follow-up: Which segment had the most percentage increase in unique products in 2021 vs 2020?
 
@@ -190,6 +193,7 @@ FROM uniqsegprod_2020 AS usp_2020, uniqsegprod_2021 AS usp_2021
 WHERE usp_2020.seg_2020 = usp_2021.seg_2021
 ORDER BY segprodcnt_inc_pct DESC;
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/product-portfolio-growth-by-segments.png" width="50%" height="50%"> </div>
 
 ### 5. List the products with the highest and lowest manufacturing costs.
 
@@ -204,6 +208,7 @@ WITH prod_manufacost AS (
 UNION
 (SELECT *, "Lowest Cost" AS overall FROM prod_manufacost ORDER BY manufacturing_cost ASC LIMIT 1);
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/highest-%26-lowest-manufacturing-cost-product.png" width="30%" height="30%"> </div>
 
 ### 6. Generate a report which contains the top 5 customers who received a higher than average pre-invoice discount % for the fiscal year 2021 in the Indian market.
 
@@ -217,6 +222,7 @@ WHERE fprid.fiscal_year = 2021 AND dc.market = "India" AND pre_invoice_discount_
 ORDER BY high_pre_inv_discount_pct DESC 
 LIMIT 5
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/high-pre-invoice-discount-customers.png" width="50%" height="50%"> </div>
 
 ### 7. Get the complete report of the Gross sales amount for the customer “Atliq Exclusive” for each month. 
 This analysis helps to get an idea of low and high-performing months and take strategic decisions.
@@ -244,6 +250,7 @@ WHERE dc.customer = 'Atliq Exclusive'
 GROUP BY Month, Fiscal_Year
 ORDER BY Fiscal_Year;
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/atliq-exclusive-monthly-gross-sales-report.png" width="50%" height="50%"> </div>
 
 ### 8. Which quarter of 2020, got the maximum total sold quantity?
 
@@ -271,6 +278,7 @@ WHERE fiscal_year = 2020
 GROUP BY FQ
 ORDER BY total_sold_qty_mln DESC;
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/total-sold-qty-by-fy-2020-quarter.png" width="50%" height="50%"> </div>
 
 ### 9. Which channel helped to bring more gross sales in the fiscal year 2021 and the percentage of contribution?
 
@@ -294,6 +302,7 @@ SELECT
 FROM channel_gs, overall_gs
 ORDER BY channel_gs_pct DESC;
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/channel-wise-gross-sales-contribution-fy-2021.png" width="50%" height="50%"> </div>
 
 ### 10. Get the Top 3 products in each division that have a high total sold quantity in the fiscal year 2021?
 
@@ -317,6 +326,8 @@ div_sold_qty_ranking AS (
 )
 SELECT * FROM div_sold_qty_ranking WHERE sold_qty_div_rank < 4;
 ```
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/division-wise-top-3-products-by-qty-sold.png" width="50%" height="50%"> </div>
+
 ---
 
 ## Conclusion:
