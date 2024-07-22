@@ -33,12 +33,11 @@ The goal is to write effective SQL queries to answer 10 ad-hoc business requests
 Please find the resource links for the project below:
 - [Introduction to AtliQ Hardware](#introduction-to-atliq-hardware)
   - [Project Objective](#project-objective)
-- [...Code Files + Dashboards + Data Model to be added...]
 - [Tools used & Methodologies implemented](#tools-used)
 - [About the Dataset](#about-the-dataset)
   - [Data Dictionary](#data-dictionary)
   - [Data Integrity](#data-integrity)
-- [...Data Model - ERD to be added...]()
+  - [Data Model - ERD](#data-model---erd)
 - [Project Implementation](#project-implementation)
 - [Ad-Hoc Analysis Insights](#ad-hoc-analysis-insights)
 - [Conclusion](#conclusion)
@@ -75,6 +74,9 @@ The dataset contains 9 tables in total, namely -
 
 ### Data Dictionary:
 [Link to the Data Dictionary Documentation](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Data%20Model/Data%20Dictionary.md)
+
+### Data Model - ERD:
+[Link to the Data Model - ERD](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Data%20Model/AtliQ%20Hardware%20ERD.jpg)
 
 ## Data Integrity:
 ROCCC Evaluation:
