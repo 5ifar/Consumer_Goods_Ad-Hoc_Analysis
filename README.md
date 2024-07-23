@@ -38,6 +38,7 @@ Please find the resource links for the project below:
   - [Data Model - ERD](#data-model---erd)
 - [Project Implementation](#project-implementation)
 - [Ad-Hoc Analysis Insights](#ad-hoc-analysis-insights)
+- [Presentation](#presentation)
 - [Conclusion](#conclusion)
 
 ## Tools used:
@@ -325,6 +326,11 @@ div_sold_qty_ranking AS (
 SELECT * FROM div_sold_qty_ranking WHERE sold_qty_div_rank < 4;
 ```
 <div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/Ad-Hoc%20Insights%20Visuals/division-wise-top-3-products-by-qty-sold.png" width="50%" height="50%"> </div>
+
+---
+
+## Presentation:
+[Link to the Project Presentation](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Presentation/Consumer%20Goods%20Ad-Hoc%20Analysis%20Presentation.pdf)
 
 ---
 
