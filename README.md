@@ -10,6 +10,22 @@ The project raw data files have not been uploaded to this repository in complian
 
 ---
 
+## Contents:
+Please find the resource links for the project below:
+- [Introduction to AtliQ Hardware](#introduction-to-atliq-hardware)
+  - [Project Objective](#project-objective)
+- [Tools used & Methodologies implemented](#tools-used)
+- [About the Dataset](#about-the-dataset)
+  - [Data Dictionary](#data-dictionary)
+  - [Data Integrity](#data-integrity)
+  - [Data Model - ERD](#data-model---erd)
+- [Project Implementation](#project-implementation)
+- [Ad-Hoc Analysis Insights](#ad-hoc-analysis-insights)
+- [Presentation](#presentation)
+- [Conclusion](#conclusion)
+
+---
+
 ## Introduction to AtliQ Hardware:
 **Domain:** Consumer Goods | **Functions:** Finance & Supply Chain
 
@@ -26,20 +42,6 @@ The project raw data files have not been uploaded to this repository in complian
 Business growth analysis is essential for any company that wants to remain competitive and successful in the long term.
 
 The goal is to write effective SQL queries to answer 10 ad-hoc business requests from the Data Analytics Director, aiming to secure valuable insights into the consumer goods sector. By fulfilling these different ad-hoc requests, I delivered specific answers to important business questions enabling the company to understand its product portfolio, sales trends across diverse customer segments and a monthly overview of products sold.
-
-## Contents:
-Please find the resource links for the project below:
-- [Introduction to AtliQ Hardware](#introduction-to-atliq-hardware)
-  - [Project Objective](#project-objective)
-- [Tools used & Methodologies implemented](#tools-used)
-- [About the Dataset](#about-the-dataset)
-  - [Data Dictionary](#data-dictionary)
-  - [Data Integrity](#data-integrity)
-  - [Data Model - ERD](#data-model---erd)
-- [Project Implementation](#project-implementation)
-- [Ad-Hoc Analysis Insights](#ad-hoc-analysis-insights)
-- [Presentation](#presentation)
-- [Conclusion](#conclusion)
 
 ## Tools used:
 1. MySQL Workbench - for Data Cleaning, Data Manipulation, Normalization and Analysis process
