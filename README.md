@@ -11,7 +11,7 @@ The project raw data files have not been uploaded to this repository in complian
 ---
 
 ## Contents:
-Please find the resource links for the project below:
+Please find the sectional links for the project below:
 - [Introduction to AtliQ Hardware](#introduction-to-atliq-hardware)
   - [Project Objective](#project-objective)
 - [Tools used & Methodologies implemented](#tools-used)
