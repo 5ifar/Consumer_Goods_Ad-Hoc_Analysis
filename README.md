@@ -77,7 +77,7 @@ The dataset contains 9 tables in total, namely -
 [Link to the Data Dictionary Documentation](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Data%20Model/Data%20Dictionary.md)
 
 ### Data Model - ERD:
-[Link to the Data Model - ERD](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Data%20Model/AtliQ%20Hardware%20ERD.jpg)
+[Link to the Data Model - ERD](https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Data%20Model/AtliQ%20Hardware%20ERD%20Updated.jpg)
 
 ## Data Integrity:
 ROCCC Evaluation:
