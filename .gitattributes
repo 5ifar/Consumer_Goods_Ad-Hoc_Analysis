@@ -1,2 +1,4 @@
 Codes/** linguist-documentation=false
 Codes/** linguist-vendored=false
+Codes/**.sql linguist-detectable=true
+Codes/**.sql linguist-language=sql
