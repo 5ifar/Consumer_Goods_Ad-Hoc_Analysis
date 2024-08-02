@@ -1,4 +1,7 @@
 # <img src="https://miro.medium.com/v2/resize:fit:1400/1*8bUjUiCWk0VhS8-lgAj0Og.png" width="4%" height="4%"> Consumer Goods: Ad-Hoc Analysis
+
+<div align="center"> <img src="https://github.com/5ifar/Consumer_Goods_Ad-Hoc_Analysis/blob/main/Assets/AH%20Consumer%20Goods%20-%20Ad%20Hoc%20Analysis%20Project%20Thumbnail%2BIcon.png" width="100%" height="100%"> </div>
+
 This repository serves as my documentation for the Consumer Goods: Ad-Hoc Analysis - MySQL Project.
 It was created as part of [Resume Project Challenge 4: Provide Insights to Management in Consumer Goods Domain](https://codebasics.io/challenge/codebasics-resume-project-challenge/7) by [Codebasics](https://codebasics.io/).
 
