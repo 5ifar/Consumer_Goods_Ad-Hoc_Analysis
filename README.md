@@ -5,8 +5,6 @@
 This repository serves as my documentation for the Consumer Goods: Ad-Hoc Analysis - MySQL Project.
 It was created as part of [Resume Project Challenge 4: Provide Insights to Management in Consumer Goods Domain](https://codebasics.io/challenge/codebasics-resume-project-challenge/7) by [Codebasics](https://codebasics.io/).
 
-It showcases my competancy to work with MySQL Workbench and demonstrates my proficiency in essential SQL concepts like **Selection, Filtering, Aggregation, Grouping, Joining, Conditional Expressions & CRUD Operations** as well as advanced SQL concepts like **Sub Queries, CTEs (Common Table Expression), Views, Temporary tables, Window Functions, UDFs (User-defined Functions), Stored Procedures and Database Triggers**.
-
 The entire project has been implemented using MySQL Workbench 8.0 CE.
 
 The project raw data files have not been uploaded to this repository in compliance with Codebasics Data & Content Distribution Policy.
@@ -54,10 +52,10 @@ The goal is to write effective SQL queries to answer 10 ad-hoc business requests
 5. GitHub - for documentation
 
 ## Skills & Methodologies implemented:
-1. Data Cleaning - CRUD Operations
-2. Data Manipulation - Sub Queries, CTEs (Common Table Expression), Views, Temporary tables, Window Functions, UDFs (User-defined Functions), Stored Procedures and Database Triggers
-3. Database Modelling and Normalization - ERD
-4. Exploratory Data Analysis - Selection, Filtering, Aggregation, Grouping, Joining, Conditional Expressions
+1. Data Cleaning - **CRUD Operations**
+2. Data Manipulation - **Sub Queries, CTEs (Common Table Expression), Views, Temporary tables, Window Functions, UDFs (User-defined Functions), Stored Procedures and Database Triggers**
+3. Database Modelling and Normalization - **ERD**
+4. Exploratory Data Analysis - **Selection, Filtering, Aggregation, Grouping, Joining, Conditional Expressions**
 5. Data Visualization
 6. Documentation
 
